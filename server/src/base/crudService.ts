@@ -116,20 +116,20 @@ export abstract class CrudService<M extends Model<Document, {}>> {
 
   async updateOne(id: string, data: any) {
     await this.model.updateOne({ _id: id }, data);
-    let record = await this.model.findOne({ _id: id });
+    const record = await this.model.findOne({ _id: id });
     if (!record) throw ErrorHelper.mgRecoredNotFound();
     return record;
   }
 
   async deleteOne(id: string) {
-    let record = await this.model.findOne({ _id: id });
+    const record = await this.model.findOne({ _id: id });
     if (!record) throw ErrorHelper.mgRecoredNotFound();
     await record.remove();
     return record;
   }
 
   async deleteMany(ids: string[]) {
-    let result = await this.model.deleteMany({ _id: { $in: ids } });
+    const result = await this.model.deleteMany({ _id: { $in: ids } });
     return result.deletedCount;
   }
 }
