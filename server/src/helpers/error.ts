@@ -82,4 +82,11 @@ export class ErrorHelper {
   static recoredNotFound(message: string) {
     return new BaseError(404, "-10", `Record is not found: ${message}`);
   }
+  // User Login
+  static passwordNotCorrect() {
+    return new BaseError(409, "409", "Password is not correct");
+  }
+  static unavalableEmailError() {
+    return new BaseError(409, "409", "This email is already registered");
+  }
 }

@@ -114,7 +114,7 @@ class CrudService {
     updateOne(id, data) {
         return __awaiter(this, void 0, void 0, function* () {
             yield this.model.updateOne({ _id: id }, data);
-            let record = yield this.model.findOne({ _id: id });
+            const record = yield this.model.findOne({ _id: id });
             if (!record)
                 throw helpers_1.ErrorHelper.mgRecoredNotFound();
             return record;
@@ -122,7 +122,7 @@ class CrudService {
     }
     deleteOne(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            let record = yield this.model.findOne({ _id: id });
+            const record = yield this.model.findOne({ _id: id });
             if (!record)
                 throw helpers_1.ErrorHelper.mgRecoredNotFound();
             yield record.remove();
@@ -131,7 +131,7 @@ class CrudService {
     }
     deleteMany(ids) {
         return __awaiter(this, void 0, void 0, function* () {
-            let result = yield this.model.deleteMany({ _id: { $in: ids } });
+            const result = yield this.model.deleteMany({ _id: { $in: ids } });
             return result.deletedCount;
         });
     }

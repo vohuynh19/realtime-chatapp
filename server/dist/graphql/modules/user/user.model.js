@@ -13,6 +13,11 @@ const userSchema = new mongoose_1.default.Schema({
     dob: { type: Date, default: Date.now() },
     gender: { type: String, required: true },
     password: { type: String, required: true },
+    role: { type: String, default: "MEMBER" },
+    isOnline: { type: Boolean, default: false },
 }, { timestamps: true });
+userSchema.index({ username: 1 });
+userSchema.index({ email: 1 }, { unique: true });
+userSchema.index({ online: 1 });
 exports.UserModel = mongo_1.MainConnection.model("User", userSchema);
 //# sourceMappingURL=user.model.js.map

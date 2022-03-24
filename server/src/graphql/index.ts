@@ -75,9 +75,7 @@ export default (app: Express, httpServer: Server) => {
     if (schema) typeDefs.push(schema);
     if (resolver) resolvers = _.merge(resolvers, resolver);
   });
-
   const schema = makeExecutableSchema({ typeDefs, resolvers });
-
   /**
    * Define Apollo server
    * onContext is called every request
@@ -93,7 +91,7 @@ export default (app: Express, httpServer: Server) => {
   app.use(
     "/graphql",
     morgan(
-      ":remote-addr :remote-user :method :url :gql-query HTTP/:http-version :status :res[content-length] - :response-time ms",
+      ":remote-addr :remote-user :method :url HTTP/:http-version :status :res[content-length] - :response-time ms",
       {
         skip: (req: Request) =>
           (_.get(req, "body.query") || "").includes("IntrospectionQuery"),

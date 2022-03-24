@@ -12,6 +12,7 @@ if (fs.existsSync(path.join(__dirname, "../../.env"))) {
 } else {
   throw new Error(".env.example not exists");
 }
+
 /**
  * Define configs base class
  */

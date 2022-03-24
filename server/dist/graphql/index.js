@@ -87,7 +87,7 @@ exports.default = (app, httpServer) => {
     /**
      * Log apollo server query for debuging
      */
-    app.use("/graphql", (0, morgan_1.default)(":remote-addr :remote-user :method :url :gql-query HTTP/:http-version :status :res[content-length] - :response-time ms", {
+    app.use("/graphql", (0, morgan_1.default)(":remote-addr :remote-user :method :url HTTP/:http-version :status :res[content-length] - :response-time ms", {
         skip: (req) => (lodash_1.default.get(req, "body.query") || "").includes("IntrospectionQuery"),
     }));
     /**
