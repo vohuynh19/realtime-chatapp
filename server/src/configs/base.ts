@@ -1,21 +1,29 @@
 import path from "path";
 import fs from "fs";
 import dotenv from "dotenv";
-const pjson = require("../../../package.json");
+const packageJson = require("../../package.json");
 
-if (fs.existsSync(path.join(__dirname, "../../../.env"))) {
+/**
+ * Process dotenv
+ */
+if (fs.existsSync(path.join(__dirname, "../../.env"))) {
   console.log(".env exists");
-  dotenv.config({ path: path.join(__dirname, "../../../.env") });
+  dotenv.config({ path: path.join(__dirname, "../../.env") });
 } else {
-  console.log(".env not exists");
+  throw new Error(".env.example not exists");
 }
-
+/**
+ * Define configs base class
+ */
 export default {
-  name: pjson.name,
-  version: pjson.version,
-  description: pjson.description,
+  name: packageJson.name,
+  version: packageJson.version,
+  description: packageJson.description,
   port: process.env.PORT || 3000,
-  secretKey: process.env.SECRET,
+  secretKey: process.env.SECRET || "MYSCRET",
   timezone: "Asia/Ho_Chi_Minh",
-  domain: `${process.env.DOMAIN}` + process.env.PORT || 3000,
+  query: {
+    limit: 10,
+  },
+  domain: process.env.DOMAIN || `http://localhost:4000`,
 };

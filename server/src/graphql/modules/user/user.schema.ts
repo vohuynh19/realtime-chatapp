@@ -3,7 +3,7 @@ import { gql } from "apollo-server-express";
 const schema = gql`
   extend type Query {
     getOneUser(id: ID!): User
-    getAllUser: [User]
+    getAllUser(q: QueryGetListInput): UserPagination
   }
 
   extend type Mutation {
@@ -14,9 +14,9 @@ const schema = gql`
 
   input CreateUserInput {
     "Email"
-    email: String
+    email: String!
     "Username"
-    username: String
+    username: String!
     "Url of avatar"
     avatarUrl: String
     "Date of birth"
@@ -24,7 +24,7 @@ const schema = gql`
     "FEMALE OR MALE"
     gender: String
     "Password"
-    password: String
+    password: String!
   }
 
   input UpdateUserInput {
@@ -42,6 +42,7 @@ const schema = gql`
     id: String
     createdAt: DateTime
     updatedAt: DateTime
+
     "Email"
     email: String
     "Username"
@@ -53,6 +54,12 @@ const schema = gql`
     "FEMALE OR MALE"
     gender: String
   }
+
+  type UserPagination {
+    data: [User]
+    total: Int
+    pagination: Pagination
+  }
 `;
 
-export default schema;
+export { schema };
